@@ -1,0 +1,35 @@
+## MobSF (Mobile Security Framework)
+
+What it is: An automated, all-in-one mobile application pentesting framework that performs static and dynamic analysis.
+
+## Key Features
+  -Automated static analysis with comprehensive reports
+  -API scanning for backend services
+  -Dynamic analysis with emulator/real device support
+  -Generates HTML, PDF, and JSON reports
+  -Scans for known vulnerabilities in third-party libraries
+
+## Primary Use
+
+# Docker setup (recommended)
+docker run -it -p 8000:8000 opensecurity/mobile-security-framework-mobsf
+
+# Then open http://localhost:8000 and upload your APK
+
+## What You Can Find
+  -Manifest issues: Dangerous permissions, exported components
+  -Code vulnerabilities: Hardcoded secrets, insecure cryptography
+  -Binary analysis: Third-party libraries with CVEs
+  -Network security: HTTP traffic, SSL bypass
+  -Data storage: Insecure file permissions, SQL injection
+
+## Advantages Over Other Tools
+  -Combines multiple checks in one tool
+  -Provides security scoring and prioritization
+  -Saves time on manual analysis
+  -Great for initial triage
+
+## Limitations
+  -May generate false positives
+  -Requires setup (Docker recommended)
+  -Dynamic analysis requires emulator setup
