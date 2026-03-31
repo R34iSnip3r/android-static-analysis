@@ -1,1 +1,28 @@
+## JADX
+What it is: JADX is a decompiler that converts Android DEX (Dalvik Executable) files into readable Java source code.
+Key Features:
 
+  -Converts APK, DEX, and AAR files to Java source code
+  -Provides both GUI and command-line interfaces
+  -Handles obfuscated code (to some extent)
+  -Shows bytecode alongside decompiled Java
+
+## Primary use
+# GUI mode - best for exploring
+jadx-gui app.apk
+
+# Command line - good for automation
+jadx -d output/ app.apk
+
+
+## What can you find there
+  -Hardcoded API keys and passwords
+  -Insecure code patterns (WebView with JavaScript enabled)
+  -Custom SSL/TLS implementations
+  -Third-party libraries used
+  -Business logic and authentication flows
+
+## Limitations 
+    -Obfuscated code may not decompile perfectly
+    -Some code may show as "// TODO: decompile failed"
+    -Cannot recover original variable names if obfuscated
