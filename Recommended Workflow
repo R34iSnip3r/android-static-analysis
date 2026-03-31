@@ -1,0 +1,24 @@
+## Recommended Workflow
+  -Start with APKTool - Decode resources and check manifest
+  -Use JADX - Decompile code to understand logic
+  -Run MobSF - Get automated comprehensive report
+  -Use ADB - Validate findings on actual device/emulator
+  -Cross-reference findings from all tools
+
+## Example Combined Workflow
+ 1. APKTool - Decode resources
+      apktool d app.apk -o decoded/
+      cat decoded/AndroidManifest.xml | grep -E "debuggable|allowBackup"
+
+  2. JADX - Decompile code
+      jadx -d jadx_output/ app.apk
+      grep -r "api_key" jadx_output/
+
+   3. MobSF - Automated scan
+        docker run -it -p 8000:8000 opensecurity/mobile-security-framework-mobsf
+      # Upload APK via web interface
+
+   4. ADB - Validate on device
+        adb install app.apk
+        adb logcat | grep -E "error|warning"
+
