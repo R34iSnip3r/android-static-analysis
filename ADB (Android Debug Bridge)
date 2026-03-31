@@ -1,0 +1,64 @@
+## ADB (Android Debug Bridge)
+
+What it is: A command-line tool that allows communication with Android devices and emulators. While primarily for dynamic analysis, it's essential for static analysis workflows too.
+
+## Key Features
+  -Install/uninstall APKs on devices
+  -Pull app data from devices
+  -Access device shell
+  -Extract app databases and SharedPreferences
+  -View logs in real-time
+
+## Primary use
+
+# List connected devices
+adb devices
+
+# Install APK
+adb install app.apk
+
+# Pull app data (requires root or backup)
+adb backup -f backup.ab com.example.app
+adb pull /data/data/com.example.app/
+
+# Check logs
+adb logcat | grep -i "myapp"
+
+## How ADB Helps Static Analysis:
+
+1. Extract Installed Apps
+  # List all installed packages
+    adb shell pm list packages
+
+  # Pull APK from device
+    adb shell pm path com.example.app
+    adb pull /data/app/com.example.app/base.apk
+
+2. Access App Data (if backup enabled)
+  # Check if backup is allowed (from static analysis)
+  # Then extract data
+    adb backup -f backup.ab com.example.app
+
+  # Convert backup.ab to readable format using `abe` tool
+
+3. Check Running Components
+  # Verify if exported activities can be launched
+    adb shell am start -n com.example.app/.MainActivity
+
+  # Check exported services
+    adb shell service list | grep example
+
+4. View Runtime Behavior
+  # Monitor logs while testing
+    adb logcat -s "MyApp" -v time
+
+  # Check if sensitive data is logged
+    adb logcat | grep -E "password|token|api"
+
+## ADB Security Considerations
+  -Requires USB debugging enabled on device
+  -Some operations need root access
+  -Production apps shouldn't have debug flags
+  -Use emulators for safe testing
+
+
