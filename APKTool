@@ -1,0 +1,43 @@
+## APKTool
+
+What it is: A tool for reverse engineering Android APK files - it decodes resources to nearly original form and rebuilds them after modifications.
+
+## Key Features
+  -Decodes resources (layouts, images, strings) to original form
+  -Rebuilds decoded resources back to APK
+  -Allows modification of app resources
+  -Useful for smali (Dalvik bytecode) debugging
+
+## Primary Use
+
+# Decode APK to read resources
+apktool d app.apk -o decoded/
+
+# Modify resources (e.g., change strings.xml)
+nano decoded/res/values/strings.xml
+
+# Rebuild APK after changes
+apktool b decoded/ -o modified.apk
+
+## What You Can Find
+  -AndroidManifest.xml: Permissions, exported components, debug flags
+  -Resources: Hardcoded URLs in strings.xml, certificate files in assets
+  -Smali code: Low-level bytecode when Java decompilation fails
+  -Layout files: UI components that might leak data
+
+## Key Difference from JADX
+  -APKTool focuses on resources (XML, assets, images)
+  -JADX focuses on code (converting DEX to Java)
+  -Best practice: Use both together
+
+## Common Use Cases
+
+# Extract all strings to find API endpoints
+grep -r "https://" decoded/res/values/strings.xml
+
+# Check for debug flag
+cat decoded/AndroidManifest.xml | grep debuggable
+
+# Find exported components
+cat decoded/AndroidManifest.xml | grep "exported=true"
+
